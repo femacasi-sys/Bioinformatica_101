@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root{
+  --bg-deep:#0b0f14;
+  --bg-panel:#16202b;
+  --line:#2c3e4c;
+  --phosphor:#4dff9f;
+  --amber:#ffb627;
+  --alert:#ff5d5d;
+  --paper:#eef2ee;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  background:var(--bg-deep);
+  color:var(--paper);
+  font-family:'VT323', monospace;
+  font-size:20px;
+  display:flex;
+  justify-content:center;
+  padding:24px 12px;
+}
+
+#stage{ width:100%; max-width:820px; }
+
+.title-row{ text-align:center; margin-bottom:14px; }
+.title-row h1{
+  font-family:'Press Start 2P', monospace;
+  font-size:15px;
+  color:var(--phosphor);
+  letter-spacing:1px;
+  margin:0 0 4px;
+  text-shadow:0 0 6px rgba(77,255,159,0.45);
+}
+.title-row .sub{ font-size:15px; color:#8fa2ad; }
+
+.crt{
+  position:relative;
+  background:var(--bg-panel);
+  border:4px solid #060a0e;
+  box-shadow:0 0 0 2px #2c3e4c, 0 0 0 6px #060a0e, inset 0 0 40px rgba(0,0,0,0.55);
+  padding:18px;
+  overflow:hidden;
+}
+.crt::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.16) 3px);
+  mix-blend-mode:multiply;
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .flicker{ animation: flicker 6s infinite; }
+  @keyframes flicker{ 0%,96%,100%{opacity:1;} 97%{opacity:0.94;} 98%{opacity:1;} }
+}
+
+.statusbar{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  border-bottom:2px solid var(--line);
+  padding-bottom:10px; margin-bottom:14px; font-size:17px;
+}
+.statusbar .chip{ display:flex; align-items:center; gap:6px; }
+.statusbar .push{ margin-left:auto; }
+
+h2.screen-title{
+  font-family:'Press Start 2P', monospace;
+  font-size:12px;
+  color:var(--paper);
+  margin:0 0 14px;
+  line-height:1.6;
+}
+h3.stage-label{
+  font-family:'Press Start 2P', monospace;
+  font-size:9px;
+  color:var(--amber);
+  margin:0 0 12px;
+  letter-spacing:0.5px;
+}
+
+.panel{
+  background:#101820;
+  border:2px solid var(--line);
+  padding:14px;
+  margin-bottom:14px;
+}
+
+.dialogue{ display:flex; gap:14px; align-items:flex-start; }
+.portrait{ width:72px; height:84px; flex:none; background:#0d151c; border:2px solid var(--line); }
+.dialogue .textbox{ flex:1; }
+.speaker{
+  font-family:'Press Start 2P', monospace;
+  font-size:10px; color:var(--amber);
+  margin-bottom:8px; display:block;
+}
+.dialogue p{ margin:0 0 10px; line-height:1.5; font-size:19px; }
+
+.btn{
+  font-family:'Press Start 2P', monospace;
+  font-size:11px;
+  background:var(--phosphor);
+  color:#06110b;
+  border:none;
+  padding:12px 16px;
+  cursor:pointer;
+  box-shadow:inset -4px -4px 0 0 rgba(0,0,0,0.35), inset 4px 4px 0 0 rgba(255,255,255,0.28);
+  margin:4px 6px 4px 0;
+}
+.btn:active{
+  box-shadow:inset 4px 4px 0 0 rgba(0,0,0,0.35), inset -4px -4px 0 0 rgba(255,255,255,0.15);
+  transform:translateY(2px);
+}
+.btn:disabled{ opacity:0.35; cursor:not-allowed; }
+.btn.secondary{
+  background:#2c3e4c; color:var(--paper);
+  box-shadow:inset -4px -4px 0 0 rgba(0,0,0,0.4), inset 4px 4px 0 0 rgba(255,255,255,0.08);
+}
+.btn.danger{ background:var(--alert); color:#2b0808; }
+
+.terminal{
+  background:#06110b;
+  color:var(--phosphor);
+  border:2px solid #103621;
+  padding:12px;
+  font-size:17px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  margin-bottom:12px;
+  text-shadow:0 0 4px rgba(77,255,159,0.35);
+}
+
+.choice{
+  display:block; width:100%; text-align:left;
+  background:#101820; color:var(--paper);
+  border:2px solid var(--line);
+  padding:10px 12px; margin-bottom:8px;
+  cursor:pointer;
+  font-family:'VT323', monospace;
+  font-size:19px;
+}
+.choice:hover{ border-color:var(--phosphor); color:var(--phosphor); }
+
+.repbar-wrap{ display:flex; align-items:center; gap:8px; font-size:14px; color:#8fa2ad; margin-bottom:6px; }
+.repbar{ width:110px; height:10px; background:#0d151c; border:1px solid var(--line); position:relative; }
+.repbar > span{ display:block; height:100%; background:var(--phosphor); }
+
+.result-delta{ font-family:'Press Start 2P', monospace; font-size:12px; margin-top:10px; }
+.result-delta.pos{ color:var(--phosphor); }
+.result-delta.neg{ color:var(--alert); }
+
+.footer-note{ text-align:center; font-size:14px; color:#5c6b74; margin-top:10px; }
+.footer-note a{ color:#8fa2ad; cursor:pointer; text-decoration:underline; }
+
+.nav-row{ display:flex; gap:16px; font-size:14px; margin-bottom:12px; }
+.nav-row a{ color:#8fa2ad; cursor:pointer; text-decoration:underline; }
+.nav-row a:hover{ color:var(--phosphor); }
+
+.cell-accession{ font-size:14px; color:#7090a0; }
+
+/* ---- Etapa 1: briefing meta ---- */
+.brief-meta{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+  gap:10px; margin-top:14px;
+}
+.brief-meta-item{
+  border:1px solid var(--line); background:#0d151c;
+  padding:8px 10px;
+}
+.brief-meta-label{ font-size:12px; color:#8fa2ad; text-transform:uppercase; letter-spacing:0.5px; }
+.brief-meta-value{ font-size:19px; color:var(--paper); }
+.brief-meta-value.difficulty{ color:var(--amber); letter-spacing:2px; }
+
+/* ---- Etapa 2: escritorio virtual ---- */
+.desktop-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));
+  gap:12px; margin-bottom:6px;
+}
+.desktop-icon{
+  border:2px solid var(--line); background:#0d151c;
+  padding:16px 10px; text-align:center; cursor:pointer;
+  position:relative;
+}
+.desktop-icon:hover{ border-color:var(--phosphor); }
+.desktop-icon .emoji{ font-size:30px; display:block; margin-bottom:8px; }
+.desktop-icon .obj-name{ font-size:15px; }
+.desktop-icon.done{ border-color:var(--phosphor); opacity:0.7; }
+.desktop-icon .check{
+  position:absolute; top:4px; right:6px; color:var(--phosphor);
+  font-family:'Press Start 2P', monospace; font-size:11px;
+}
+
+.checklist{ margin-top:6px; font-size:15px; color:#8fa2ad; }
+.checklist .item{ margin-bottom:4px; }
+.checklist .item.ok{ color:var(--phosphor); }
+
+.sample-row, .tool-row{
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;
+}
+.pick-card{
+  flex:1 1 160px; border:2px solid var(--line); background:#0d151c;
+  padding:10px 12px; cursor:pointer;
+}
+.pick-card:hover{ border-color:var(--phosphor); }
+.pick-card .pick-title{ font-size:17px; color:var(--paper); }
+.pick-card .pick-sub{ font-size:13px; color:#8fa2ad; margin-top:4px; }
+.pick-card.wrong{ border-color:var(--alert); }
+.pick-card.correct-picked{ border-color:var(--phosphor); }
+
+/* ---- Etapa 3: pipeline ---- */
+.pipeline-steps{ list-style:none; margin:0; padding:0; }
+.step-card{
+  border:2px solid var(--line); background:#0d151c;
+  padding:10px 12px; margin-bottom:8px;
+  cursor:grab; display:flex; align-items:center; gap:10px;
+  font-size:17px;
+}
+.step-card .drag-handle{ color:#5c6b74; font-size:16px; }
+.step-card.dragging{ opacity:0.35; }
+.step-card.drag-over{ border-color:var(--phosphor); border-style:dashed; }
+.step-card.locked-correct{ border-color:var(--phosphor); cursor:default; }
+.step-card.locked-wrong{ border-color:var(--alert); cursor:default; }
+
+.param-options{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+.param-card{
+  flex:1 1 150px; border:2px solid var(--line); background:#0d151c;
+  padding:10px 12px; cursor:pointer; text-align:center;
+}
+.param-card:hover{ border-color:var(--phosphor); }
+.param-card.selected{ border-color:var(--phosphor); box-shadow:0 0 0 1px var(--phosphor); }
+.param-card .param-value{ font-family:'Press Start 2P', monospace; font-size:13px; color:var(--paper); margin-bottom:4px; }
+.param-card .param-hint{ font-size:13px; color:#8fa2ad; }
+
+.run-log{
+  background:#06110b; border:2px solid #103621; color:var(--phosphor);
+  padding:12px; font-size:16px; line-height:1.6; margin-top:12px;
+  text-shadow:0 0 4px rgba(77,255,159,0.3);
+}
+.progress-track{
+  height:14px; background:#0d151c; border:1px solid var(--line); margin-top:8px; overflow:hidden;
+}
+.progress-fill{
+  height:100%; background:var(--phosphor); width:0%;
+  transition:width 0.4s linear;
+}
+
+/* ---- Etapa 4: resultados ---- */
+.hit-list{ list-style:none; margin:0 0 12px; padding:0; }
+.hit-row{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  border:2px solid var(--line); background:#0d151c;
+  padding:10px 12px; margin-bottom:8px; cursor:pointer;
+}
+.hit-row:hover{ border-color:var(--phosphor); }
+.hit-row.selected{ border-color:var(--amber); }
+.hit-row .hit-name{ font-size:18px; }
+.hit-row .hit-pct{ font-family:'Press Start 2P', monospace; font-size:11px; color:var(--phosphor); }
+.hit-row .hit-pct.neg{ color:var(--alert); }
+.hit-row .hit-pct.neutral{ color:var(--amber); }
+
+.hit-detail{
+  border-left:3px solid var(--amber); background:#080f09;
+  padding:12px 14px; font-size:16px; color:#b8ccc0; line-height:1.6;
+}
+.hit-detail-title{
+  display:block; font-family:'Press Start 2P', monospace;
+  font-size:11px; color:var(--amber); margin-bottom:8px;
+}
+.hit-detail-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:8px; margin-bottom:8px;
+}
+.hit-detail-grid div{ font-size:14px; color:#8fa2ad; }
+.hit-detail-grid b{ display:block; font-size:17px; color:var(--paper); }
+
+/* ---- Etapa 5 / final: estrellas ---- */
+.stars{ font-size:28px; letter-spacing:4px; color:#2c3e4c; margin:10px 0; }
+.stars .filled{ color:var(--amber); }
+.summary-list{ font-size:16px; color:#b8ccc0; margin:0 0 14px; }
+.summary-list div{ margin-bottom:4px; }
+.summary-list b{ color:var(--paper); }
+
+@media (max-width:520px){
+  .desktop-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+
+/* ---- Etapa 3 (variante): editor de bloques ---- */
+.code-editor{
+  background:#06110b; border:2px solid #103621; padding:12px;
+  font-family:'VT323', monospace; font-size:18px; color:var(--paper);
+  margin-bottom:10px;
+}
+.code-line{ margin-bottom:6px; }
+.code-fixed{ color:#8fa2ad; }
+.code-slot{
+  display:inline-block; min-width:120px; text-align:center;
+  border:2px dashed var(--line); background:#0d151c;
+  padding:2px 10px; color:var(--paper);
+}
+.code-slot.drag-over{ border-color:var(--amber); border-style:dashed; }
+.code-slot.correct{ border-style:solid; border-color:var(--phosphor); color:var(--phosphor); }
+.code-slot.incorrect{ border-style:solid; border-color:var(--alert); color:var(--alert); }
+.code-slot.locked{ cursor:default; }
+
+.block-pool{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.code-block{
+  border:2px solid var(--line); background:#0d151c;
+  padding:8px 12px; cursor:grab; font-size:16px; color:var(--paper);
+}
+.code-block.dragging{ opacity:0.35; }
+
+/* ---- Etapa 4 (variante): visor de alineamiento ---- */
+.align-region{
+  border:2px solid var(--line); background:#101820;
+  padding:10px 12px; margin-bottom:10px; cursor:pointer;
+}
+.align-region:hover{ border-color:var(--phosphor); }
+.align-region.selected{ border-color:var(--amber); }
+.align-region.found{ border-color:var(--phosphor); }
+.align-region-label{ font-size:15px; color:#8fa2ad; margin-bottom:6px; }
+.align-row{ white-space:pre; font-size:17px; line-height:1.5; }
+.align-row.align-bar{ color:#3a5245; }
+.align-mismatch{ background:var(--alert); color:#2b0808; }
+
+/* ---- Etapa 5 (variante): interpretación clínica ---- */
+.db-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; margin-bottom:14px; }
+.db-card{
+  flex:1 1 160px; border:2px solid var(--line); background:#0d151c;
+  padding:10px 12px;
+}
+.db-card.queried{ border-color:var(--phosphor); }
+.db-result{ font-size:15px; color:var(--phosphor); margin-top:6px; }
+
+/* ---- Etapa 2 (microbioma): organización del estudio ---- */
+.sort-pool{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.sort-board{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+.sort-bucket{
+  border:2px solid var(--line); background:#101820;
+  padding:10px; min-height:120px;
+}
+.sort-bucket.drag-over{ border-color:var(--amber); border-style:dashed; }
+.sort-chip{
+  border:2px solid var(--line); background:#0d151c;
+  padding:8px 10px; margin-top:8px; cursor:grab;
+}
+.sort-chip.dragging{ opacity:0.35; }
+.sort-chip.correct{ border-color:var(--phosphor); }
+.sort-chip.incorrect{ border-color:var(--alert); }
+.sort-chip.locked{ cursor:default; }
+
+/* ---- Etapa 3 (microbioma): dashboard ---- */
+.tab-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.tab-btn{
+  font-family:'Press Start 2P', monospace; font-size:10px;
+  background:#0d151c; color:var(--paper); border:2px solid var(--line);
+  padding:10px 12px; cursor:pointer;
+}
+.tab-btn:hover{ border-color:var(--phosphor); }
+.tab-btn.active{ border-color:var(--phosphor); color:var(--phosphor); }
+
+/* ---- Etapa 4 (microbioma): construcción de hipótesis ---- */
+.finding-item{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 4px; cursor:pointer; font-size:16px;
+}
+.finding-item:hover{ color:var(--phosphor); }
+.finding-box{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:20px; height:20px; border:2px solid var(--line); flex:none;
+  color:var(--phosphor); font-size:14px;
+}
+.finding-item.checked .finding-box{ border-color:var(--phosphor); }
